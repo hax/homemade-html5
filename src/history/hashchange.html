@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<title>Sample of hashchange event</title>
+<script src="../utils.js"></script>
+<script src="hashchange.js"></script>
+<script>
+onhashchange = function (e) {
+    out (e.oldURL + ' -> ' + e.newURL)
+}
+
+function assign(data) {
+    self.location.assign(location.pathname + '#' + data)
+}
+</script>
+
+</head>
+
+<body>
+
+<p>
+<input type="button" onclick="history.back()" value="back">
+<input type="button" onclick="history.forward()" value="forward">
+<input type="button" onclick="assign('test')" value="test">
+<input type="button" onclick="assign(Math.random().toString(16).slice(2, 6))" value="random">
+
+</body>
+</html>
