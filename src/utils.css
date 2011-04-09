@@ -1,0 +1,14 @@
+#stdout {
+    position: fixed;
+    top: 77%; left: 0; bottom: 0; right: 0;
+    background-color: black;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0.25em 0.5em;
+    overflow: auto;
+    font: small consolas, courier new, monospace;
+}

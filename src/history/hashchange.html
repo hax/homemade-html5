@@ -2,11 +2,15 @@
 <html>
 <head>
 <title>Sample of hashchange event</title>
+<link rel="stylesheet" href="../utils.css">
 <script src="../utils.js"></script>
 <script src="hashchange.js"></script>
 <script>
 onhashchange = function (e) {
-    out (e.oldURL + ' -> ' + e.newURL)
+    out (getHash(e.oldURL) + ' -> ' + getHash(e.newURL))
+}
+function getHash(url) {
+    return url.slice(url.indexOf('#'))
 }
 
 function assign(data) {
@@ -22,7 +26,7 @@ function assign(data) {
 <input type="button" onclick="history.back()" value="back">
 <input type="button" onclick="history.forward()" value="forward">
 <input type="button" onclick="assign('test')" value="test">
-<input type="button" onclick="assign(Math.random().toString(16).slice(2, 6))" value="random">
+<input type="button" onclick="assign(Math.random().toString(16).slice(2, 8))" value="random">
 
 </body>
 </html>

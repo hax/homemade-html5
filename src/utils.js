@@ -1,25 +1,33 @@
 function out(message) {
-    if (console) console.debug('out:', message)
     out.buffer.push(message)
+    if (window.console) console.debug('out:', message)
 }
 out.buffer = []
 out.flush = function () {
-    var stdout = document.getElementById('stdout')
-    if (stdout) {
-        stdout.innerHTML += out.buffer.join('\n').replace(/&/g, '&amp;').replace(/</g, '&lt;')
-        out.buffer = []
-    } else if (document.body) {
-		stdout = document.createElement('pre')
-		stdout.id = 'stdout'
-		document.body.appendChild(stdout)
-        stdout.style.position = 'fixed'
-        stdout.style.backgroundColor = 'black'
-        stdout.style.color = 'white'
-        stdout.style.bottom = 0
-        stdout.style.maxHeight = '38%'
-        stdout.style.overflow = 'auto'
+    if (out.buffer.length > 0) {
+        var stdout = document.getElementById('stdout')
+        if (stdout) {
+            var s = out.buffer.join('\n') + '\n'
+            out.buffer = []
+            stdout.innerHTML += s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            if (out.autoScroll) stdout.scrollTop = stdout.scrollHeight - stdout.clientHeight
+        } else if (document.body) {
+    		stdout = document.createElement('pre')
+    		stdout.id = 'stdout'
+    		document.body.appendChild(stdout)
+        }
     }
 }
+out.show = function () {
+    var stdout = document.getElementById('stdout')
+    if (stdout) stdout.style.visibility = 'visible'
+}
+out.hide = function () {
+    var stdout = document.getElementById('stdout')
+    if (stdout) stdout.style.visibility = 'hidden'
+}
+out.autoScroll = true
+
 setInterval(out.flush, 100)
 
 function fireSimpleEvent(type, target, option) {
